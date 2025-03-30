@@ -79,3 +79,36 @@ class AudioEncoder(nn.Module):
         return self.projection(features.squeeze(-1))
 
 
+class MultimodalSentimentModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        # Encoders
+        self.text_encoder = TextEncoder()
+        self.video_encoder = VideoEncoder()
+        self.audio_encoder = AudioEncoder()
+
+        # Fusion layer
+        self.fusion_layer = nn.Sequential(
+            nn.Linear(128 * 3, 256),
+            nn.BatchNorm1d(256),
+            nn.ReLU(),
+            nn.Dropout(0.3)
+        )
+
+        # Classification heads
+        self.emotion_classifier = nn.Sequential(
+            nn.Linear(256, 64),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(64, 7)  # Sadness, anger
+        )
+
+        self.sentiment_classifier = nn.Sequential(
+            nn.Linear(256, 64),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(64, 3)  # Negative, positive, neutral
+        )
+
+    

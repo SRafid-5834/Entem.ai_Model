@@ -8,13 +8,13 @@ Follow these steps to install and set up the project.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/SRafid-5834/Entem.ai_model.git
+git clone https://github.com/SRafid-5834/Entem.ai_Model.git
 ```
 
 ### Navigate to the Project Directory
 
 ```bash
-cd Entem.ai_model
+cd Entem.ai_Model
 ```
 
 ### Install Python
